@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<menu xmlns="http://www.training.by/2016/MENUSchema"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.training.by/2016/MENUSchema menu.xsd">
+    <breakfast>
+        <food id="ID-1">
+            <photo>http://vk.com/food.jpg</photo>
+            <name>Глазунья</name>
+            <description>2 яйца (на выбор: сыр, витчина, помидоры)</description>
+            <portion-size>100</portion-size>
+            <portion-size>20</portion-size>
+            <portion-size>30</portion-size>
+            <price>
+                <portion-type>1. Первый тип</portion-type>
+                <portion-cost>200</portion-cost>
+            </price>
+            <price>
+                <portion-type>2. Второй тип</portion-type>
+                <portion-cost>200</portion-cost>
+            </price>
+        </food>
+        <food id="ID-2">
+            <photo>http://vk.com/food.jpg</photo>
+            <name>Блинчики с мясом</name>
+            <description>Жаренные блинчики с мясом</description>
+            <portion-size>100</portion-size>
+            <portion-size>20</portion-size>
+            <portion-size>30</portion-size>            
+            <price>
+                <portion-type>kjhkjh</portion-type>
+                <portion-cost>200</portion-cost>
+            </price>
+        </food>        
+    </breakfast>
+    <cold-appetizers>
+        <food id="ID-3">
+            <photo>http://vk.com/food.jpg</photo>
+            <name>Соленья по-домашнему</name>
+            <description>Маринованные овощи</description>
+            <portion-size>100</portion-size>
+            <portion-size>20</portion-size>
+            <portion-size>30</portion-size>            
+            <price>
+                <portion-type>300</portion-type>
+                <portion-cost>200</portion-cost>
+            </price>
+        </food>
+        <food id="ID-4">
+            <photo>http://vk.com/food.jpg</photo>
+            <name>Мороженое</name>
+            <description>Сливочное мороженое</description>
+             <portion-size>100</portion-size>
+            <portion-size>20</portion-size>
+            <portion-size>30</portion-size>            
+            <price>
+                <portion-type>300</portion-type>
+                <portion-cost>200</portion-cost>
+            </price>
+        </food>        
+    </cold-appetizers>   
+     
+    <hot-appetizers>
+        <food id="ID-5">
+            <photo>http://vk.com/food.jpg</photo>
+            <name>Соленья по-домашнему</name>
+            <description>Маринованные овощи</description>
+            <portion-size>100</portion-size>
+            <portion-size>20</portion-size>
+            <portion-size>30</portion-size>       
+            <price>
+                <portion-type>300</portion-type>
+                <portion-cost>200</portion-cost>
+            </price>
+        </food>
+        <food id="ID-6">
+            <photo>http://vk.com/food.jpg</photo>
+            <name>Мороженое</name>
+            <description>Сливочное мороженое</description>
+            <portion-size>100</portion-size>
+            <portion-size>20</portion-size>
+            <portion-size>30</portion-size>     
+            <price>
+                <portion-type>300</portion-type>
+                <portion-cost>200</portion-cost>
+            </price>
+        </food>        
+    </hot-appetizers>     
+
+</menu>
