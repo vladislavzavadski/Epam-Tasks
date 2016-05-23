@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.training.by/2016/MENUSchema"
+           xmlns:tns="http://www.training.by/2016/MENUSchema"
+           elementFormDefault="qualified">
+    <xs:element name="menu">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="breakfast" type="tns:foodType" minOccurs="0"/>
+                <xs:element name="hot-appetizers" type="tns:foodType" minOccurs="0"/> 
+                <xs:element name="cold-appetizers" type="tns:foodType" minOccurs="0"/>
+            </xs:all>
+        </xs:complexType>       
+    </xs:element>
+    
+    <xs:complexType name="foodType">
+        <xs:sequence>
+            <xs:element name="food" type="tns:food" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="price">
+        <xs:sequence>
+            <xs:element name="portion-type" type="xs:string"/>
+            <xs:element name="portion-cost" type="xs:positiveInteger" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="food">
+        <xs:sequence>
+            <xs:element name="photo" type="xs:anyURI"/>
+            <xs:element name="name" type="tns:russianString"/>
+            <xs:element name="kitchen" type="tns:kitchenType"/>
+            <xs:element name="description" type="tns:russianString"/>
+            <xs:element name="portion-size" type="xs:positiveInteger" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="price" type="tns:price" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID"/>
+    </xs:complexType>
+    
+    <xs:simpleType name="russianString">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[а-яА-Я\s0-9\.,\(\):\-]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="kitchenType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Российская"/>
+            <xs:enumeration value="Итальянская"/>
+            <xs:enumeration value="Испанская"/>
+            <xs:enumeration value="Французская"/>
+            <xs:enumeration value="Китайская"/>
+            <xs:enumeration value="Японская"/>
+            <xs:enumeration value="Литовская"/>
+            <xs:enumeration value="Белорусская"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
