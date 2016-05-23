@@ -2,23 +2,23 @@
 
 <xs:schema version="1.0"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:this="http://training.by/2016/WEBSchema"
+           xmlns:tns="http://training.by/2016/WEBSchema"
            targetNamespace="http://training.by/2016/WEBSchema"
            elementFormDefault="qualified">
     
     <xs:element name="web-app">
         
         <xs:complexType>
-            
+           	
             <xs:choice maxOccurs="unbounded">
-                <xs:element name="listener" type="this:listener"/>
-                <xs:element name="error-page" type="this:errorPage"/> 
-                <xs:element name="filter" type="this:filter"/>
-                <xs:element name="servlet" type="this:servlet"/>
+                <xs:element name="listener" type="tns:listener"/>
+                <xs:element name="error-page" type="tns:errorPage"/> 
+                <xs:element name="filter" type="tns:filter"/>
+                <xs:element name="servlet" type="tns:servlet"/>
                 <xs:element name="display-name" type="xs:string"/>
-                <xs:element name="filter-mapping" type="this:filterMapping"/>
-                <xs:element name="servlet-mapping" type="this:servletMapping"/> 
-                <xs:element name="welcome-file-list" type="this:welcomeFileList"/>
+                <xs:element name="filter-mapping" type="tns:filterMapping"/>
+                <xs:element name="servlet-mapping" type="tns:servletMapping"/> 
+                <xs:element name="welcome-file-list" type="tns:welcomeFileList"/>
             </xs:choice>
                         
             <xs:attribute name="id" type="xs:string" use="optional"/>
@@ -48,7 +48,7 @@
         <xs:sequence>
             <xs:element name="filter-name" type="xs:string"/>
             <xs:element name="filter-class" type="xs:string"/>
-            <xs:element name="init-param" type="this:initParam" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="init-param" type="tns:initParam" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -56,7 +56,7 @@
         <xs:sequence>
             <xs:element name="servlet-name" type="xs:string"/>
             <xs:element name="servlet-class" type="xs:string"/>
-            <xs:element name="init-param" type="this:initParam" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="init-param" type="tns:initParam" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -88,4 +88,4 @@
         </xs:sequence>
     </xs:complexType>
     
-</xs:schema
+</xs:schema>
