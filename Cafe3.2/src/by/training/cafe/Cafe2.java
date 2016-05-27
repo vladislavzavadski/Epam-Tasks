@@ -27,7 +27,7 @@ public class Cafe2 {
         Parser parser = ParsersFactory.getInstance().getParser();
         parser.parse("Menu/menu.xml");
         Document document = parser.getDocument();
-        Element element = document.getDocumentElement();
+        Element element = document.getRootElement();
         ArrayList<Element> breakfast = element.getElementsByTag("breakfast");
         ArrayList<Element> hotAppetizers = element.getElementsByTag("hot-appetizers");
         ArrayList<Element> coldAppetizers = element.getElementsByTag("cold-appetizers");

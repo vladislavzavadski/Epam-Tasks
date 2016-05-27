@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 public class MyParser implements Parser{
     
     private String xmlText="";
-    private Document document;
+    private DocumentImpl document;
     
     @Override
     public void parse(String url) throws FileNotFoundException{
@@ -33,7 +33,7 @@ public class MyParser implements Parser{
     }
     
     private void createDocument(){
-        document = new Document();
+        document = new DocumentImpl();
         Pattern pattern = Pattern.compile("<([\\S]+).+</\\1>");
         Matcher matcher = pattern.matcher(xmlText);
         matcher.find();
@@ -50,7 +50,7 @@ public class MyParser implements Parser{
         return matcher.group().replaceAll("[><]", "");       
     }  
     
-    private void lookAttributes(Element element, String xmlText){
+    private void lookAttributes(ElementImpl element, String xmlText){
         Pattern pattern = Pattern.compile("<.+?>");
         Matcher matcher = pattern.matcher(xmlText);
         matcher.find();
@@ -64,8 +64,8 @@ public class MyParser implements Parser{
     }    
      
     
-    private Element lookRootElement(String xmlText){   
-        Element element = new Element();
+    private ElementImpl lookRootElement(String xmlText){   
+        ElementImpl element = new ElementImpl();
         Pattern pattern = Pattern.compile("<([\\S]+).+?</\\1>");
         Matcher matcher = pattern.matcher(xmlText.substring(1));
         while(matcher.find()){
@@ -102,6 +102,6 @@ public class MyParser implements Parser{
     
     @Override
     public Document getDocument(){       
-        return document;
+        return (Document)document;
     }
 }
