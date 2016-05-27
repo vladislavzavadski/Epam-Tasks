@@ -10,7 +10,8 @@ package by.training.cafe;
 import by.training.cafe.beans.Food;
 import by.training.own_parser.domain.Document;
 import by.training.own_parser.domain.Element;
-import by.training.own_parser.service.MyParser;
+import by.training.own_parser.factory.ParsersFactory;
+import by.training.own_parser.service.Parser;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import javafx.util.Pair;
  */
 public class Cafe2 {
     public static void main(String[] args) throws FileNotFoundException {
-        MyParser parser = new MyParser();
+        Parser parser = ParsersFactory.getInstance().getParser();
         parser.parse("Menu/menu.xml");
         Document document = parser.getDocument();
         Element element = document.getDocumentElement();

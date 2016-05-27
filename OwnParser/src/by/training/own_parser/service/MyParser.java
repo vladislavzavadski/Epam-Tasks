@@ -100,6 +100,7 @@ public class MyParser implements Parser{
         return temp.split("=")[1].replaceAll("\"", "");
     }    
     
+    @Override
     public Document getDocument(){       
         return document;
     }

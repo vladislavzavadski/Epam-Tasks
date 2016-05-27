@@ -5,6 +5,7 @@
  */
 package by.training.own_parser.service;
 
+import by.training.own_parser.domain.Document;
 import java.io.FileNotFoundException;
 
 /**
@@ -13,4 +14,5 @@ import java.io.FileNotFoundException;
  */
 public interface Parser {
     void parse(String url) throws FileNotFoundException;
+    Document getDocument();
 }
