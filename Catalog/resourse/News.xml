@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<catalog xmlns="http://www.training.by/2016/CatalogSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.training.by/2016/CatalogSchema News.xsd">
+    <category name="film">
+        <subcategory name="poem">
+            <news>
+                <name>Bla-bla-bla</name>
+                <author>qwe</author>
+                <author>qwe1</author>
+                <author>qwe2</author>
+                <issue-date>2016-05-30</issue-date>
+                <body>Body</body>
+            </news>
+            <news>
+                <name>Bla-bla-bla</name>
+                <author>qwe</author>
+                <author>qwe1</author>
+                <author>qwe2</author>
+                <issue-date>2016-05-30</issue-date>
+                <body>Body</body>
+            </news>
+            <news>
+                <name>Bla-bla-bla</name>
+                <author>qwe</author>
+                <author>qwe1</author>
+                <author>qwe2</author>
+                <issue-date>2016-05-30</issue-date>
+                <body>Body</body>
+            </news>
+            <news>
+                <name>Bla-bla-bla</name>
+                <author>qwe</author>
+                <author>qwe1</author>
+                <author>qwe2</author>
+                <issue-date>2016-05-30</issue-date>
+                <body>Body</body>
+            </news>
+        </subcategory>
+    </category>
+    <category name="disk">
+        <subcategory name="music">
+            <news>
+                <name>Выпьем за любовь</name>
+                <author>Vladislav</author>
+                <author>Zavadski</author>
+                <author>qweeqw</author>
+                <issue-date>2016-05-30</issue-date>
+                <body>Выпьем за любовьь</body>
+            </news>
+            <news>
+                <name>Выпьем за любовь</name>
+                <author>Vladislav</author>
+                <author>Zavadski</author>
+                <author>qweeqw</author>
+                <issue-date>2016-05-30</issue-date>
+                <body>Выпьем за любовьь</body>
+            </news>
+            <news>
+                <name>Выпьем за любовь</name>
+                <author>Vladislav</author>
+                <author>Zavadski</author>
+                <author>qweeqw</author>
+                <issue-date>2016-05-30</issue-date>
+                <body>Выпьем за любовьь</body>
+            </news>
+            <news>
+                <name>Выпьем за любовь</name>
+                <author>Vladislav</author>
+                <author>Zavadski</author>
+                <author>qweeqw</author>
+                <issue-date>2016-05-30</issue-date>
+                <body>Выпьем за любовьь</body>
+            </news>
+        </subcategory>
+    </category>
+</catalog>
