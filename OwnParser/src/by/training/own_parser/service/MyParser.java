@@ -33,9 +33,9 @@ public class MyParser implements Parser{
     }
     
     private void createDocument(){
+        final String ROOT_TAG_REG_EXP = "<([\\S]+).+</\\1>";
         document = new DocumentImpl();
-        Pattern pattern = Pattern.compile("<([\\S]+).+</\\1>");
-        Matcher matcher = pattern.matcher(xmlText);
+        Matcher matcher = getMatcher(ROOT_TAG_REG_EXP, xmlText);
         matcher.find();
         document.setRootElement(lookRootElement(matcher.group()));
         lookComments();
@@ -44,19 +44,18 @@ public class MyParser implements Parser{
     }
 
     private String lookTextContent(String xmlText){
-        Pattern pattern = Pattern.compile(">.+<");
-        Matcher matcher = pattern.matcher(xmlText);
+        final String TEXT_WITHIN_TAG_REG_EXP = ">.+<";
+        Matcher matcher = getMatcher(TEXT_WITHIN_TAG_REG_EXP, xmlText);
         matcher.find();
         return matcher.group().replaceAll("[><]", "");       
     }  
     
     private void lookAttributes(ElementImpl element, String xmlText){
-        Pattern pattern = Pattern.compile("<.+?>");
-        Matcher matcher = pattern.matcher(xmlText);
+        final String TAG_START_REG_EXP = "<.+?>";
+        final String ATTRIBUTE_VALUE_PAIR_REG_EXP = "\\S+?=\\\".+?\\\"";
+        Matcher matcher = getMatcher(TAG_START_REG_EXP, xmlText);
         matcher.find();
-        String temp = matcher.group();
-        pattern = Pattern.compile("\\S+?=\\\".+?\\\"");
-        matcher = pattern.matcher(temp);
+        matcher = getMatcher(ATTRIBUTE_VALUE_PAIR_REG_EXP, matcher.group());
         while(matcher.find()){
             String tmp = matcher.group();
             element.addAttribute(new Attribute(tmp.split("=")[0], tmp.split("=")[1].replaceAll("\"", "")));
@@ -65,9 +64,9 @@ public class MyParser implements Parser{
      
     
     private ElementImpl lookRootElement(String xmlText){   
+        final String ELEMENT_REG_EXP = "<([\\S]+).+?</\\1>";
         ElementImpl element = new ElementImpl();
-        Pattern pattern = Pattern.compile("<([\\S]+).+?</\\1>");
-        Matcher matcher = pattern.matcher(xmlText.substring(1));
+        Matcher matcher = getMatcher(ELEMENT_REG_EXP, xmlText.substring(1));
         while(matcher.find()){
             element.addElement(matcher.group(1), lookRootElement(matcher.group()));                  
         }
@@ -81,24 +80,28 @@ public class MyParser implements Parser{
     }
     
     private void lookComments(){
-        Pattern pattern = Pattern.compile("<!--.+?-->");
-        Matcher matcher = pattern.matcher(xmlText);
+        final String COMMENT_REG_EXP = "<!--.+?-->";
+        Matcher matcher = getMatcher(COMMENT_REG_EXP, xmlText);
         while (matcher.find()) {            
             document.addComment(matcher.group());
         }        
     }
 
     private String getDocumentProperty(String property){
-        Pattern pattern = Pattern.compile("<\\?.+?\\?>");
-        Matcher matcher = pattern.matcher(xmlText);
+        final String DOCUMENT_HEADER_REG_EXP = "<\\?.+?\\?>";
+        final String DOCUMENT_PROPERTY_REG_EXP = "=\\\".+?\\\"";
+        Matcher matcher = getMatcher(DOCUMENT_HEADER_REG_EXP, xmlText);
         matcher.find();
-        String temp = matcher.group();
-        pattern = Pattern.compile(property+"=\\\".+?\\\"");
-        matcher = pattern.matcher(xmlText);
+        matcher = getMatcher(property+DOCUMENT_PROPERTY_REG_EXP, xmlText);
         matcher.find();
-        temp = matcher.group();
-        return temp.split("=")[1].replaceAll("\"", "");
-    }    
+        return matcher.group().split("=")[1].replaceAll("\"", "");
+    }
+
+    private Matcher getMatcher(String regExp, String srcString){
+        Pattern pattern = Pattern.compile(regExp);
+        Matcher matcher = pattern.matcher(srcString);
+        return matcher;
+    }
     
     @Override
     public Document getDocument(){       
