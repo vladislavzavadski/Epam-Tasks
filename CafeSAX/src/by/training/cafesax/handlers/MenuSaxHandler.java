@@ -68,40 +68,45 @@ public class MenuSaxHandler extends DefaultHandler{
     
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException{
-        if(qName.equals("photo")){
-            food.setPhoto(text.toString());
-        }
-        
-        if(qName.equals("name")){
-            food.setName(text.toString());
-        }
-        
-        if(qName.equals("kitchen")){
-            food.setKitchen(text.toString());
-        }
-        
-        if(qName.equals("description")){
-            food.setDescription(text.toString());
-        }
-        
-        if(qName.equals("portion-size")){
-            food.addPortion(Integer.parseInt(text.toString()));
-        }
-        
-        if(qName.equals("portion-type")){
-            portionType = text.toString();
-        }
-        
-        if(qName.equals("portion-cost")){
-            cost = Integer.parseInt(text.toString());
-        }
-        
-        if(qName.equals("price")){
-            food.addPrice(portionType, cost);
-        }
-        if(qName.equals("food")){
-            menu.get(currentFoodType).add(food);
-            food = null;
+ 
+        switch(qName){
+            case "photo":{
+                food.setPhoto(text.toString());
+                break;
+            }
+            case "name":{
+                food.setName(text.toString());
+                break;
+            }
+            case "kitchen":{
+                food.setKitchen(text.toString());
+                break;
+            }
+            case "description":{
+                food.setDescription(text.toString());
+                break;
+            }
+            case "portion-size":{
+                food.addPortion(Integer.parseInt(text.toString()));
+                break;
+            }
+            case "portion-type":{
+                portionType = text.toString();
+                break;
+            }
+            case "portion-cost":{
+                cost = Integer.parseInt(text.toString());
+                break;
+            }
+            case "price":{
+                food.addPrice(portionType, cost);
+                break;
+            }
+            case "food":{
+                menu.get(currentFoodType).add(food);
+                food = null;
+                break;
+            }
         }
         
         

@@ -71,36 +71,44 @@ public class CafeStAX {
                     if(content.equals("")){
                         break;
                     }
-                    if(localName.equals("photo")){
-                        food.setPhoto(content);
-                    }
-
-                    if(localName.equals("name")){
-                        food.setName(content);
-                    }
-
-                    if(localName.equals("kitchen")){
-                        food.setKitchen(content);
-                    }
-
-                    if(localName.equals("description")){
-                        food.setDescription(content);
-                    }
-
-                    if(localName.equals("portion-size")){
-                        food.addPortion(Integer.parseInt(content));
-                    }
-
-                    if(localName.equals("portion-type")){
-                        portionType = content;
-                    }
-
-                    if(localName.equals("portion-cost")){
-                        cost = Integer.parseInt(content);
-                    }
-
-                    if(localName.equals("price")){
-                        food.addPrice(portionType, cost);
+                    switch(localName){
+                        case "photo":{
+                            food.setPhoto(content);
+                            break;
+                        }
+                        case "name":{
+                            food.setName(content);
+                            break;
+                        }
+                        case "kitchen":{
+                            food.setKitchen(content);
+                            break;
+                        }
+                        case "description":{
+                            food.setDescription(content);
+                            break;
+                        }
+                        case "portion-size":{
+                            food.addPortion(Integer.parseInt(content));
+                            break;
+                        }
+                        case "portion-type":{
+                            portionType = content;
+                            break;
+                        }
+                        case "portion-cost":{
+                            cost = Integer.parseInt(content);
+                            break;
+                        }
+                        case "price":{
+                            food.addPrice(portionType, cost);
+                            break;
+                        }
+                        case "food":{
+                            menu.get(currentFoodType).add(food);
+                            food = null;
+                            break;
+                        }
                     }
 
                     break;
