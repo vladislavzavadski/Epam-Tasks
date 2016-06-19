@@ -12,14 +12,14 @@ public class Drug {
     private String name;
     private byte[] drugImage;
     private String description;
-    private String manufacturer;
     private float price;
     private boolean prescriptionEnable;
     private boolean inStock;
-    private String drugClass;
     private DrugType type;
     private String activeSubstance;
     private List<Integer> dosages = new ArrayList<>();
+    private DrugManufacturer drugManufacturer;
+    private DrugClass drugClass;
 
     @Override
     public String toString() {
@@ -28,15 +28,65 @@ public class Drug {
                 ", name='" + name + '\'' +
                 ", drugImage=" + Arrays.toString(drugImage) +
                 ", description='" + description + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
                 ", price=" + price +
                 ", prescriptionEnable=" + prescriptionEnable +
                 ", inStock=" + inStock +
-                ", drugClass='" + drugClass + '\'' +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 ", activeSubstance='" + activeSubstance + '\'' +
                 ", dosages=" + dosages +
+                ", drugManufacturer=" + drugManufacturer +
+                ", drugClass=" + drugClass +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Drug drug = (Drug) o;
+
+        if (id != drug.id) return false;
+        if (Float.compare(drug.price, price) != 0) return false;
+        if (prescriptionEnable != drug.prescriptionEnable) return false;
+        if (inStock != drug.inStock) return false;
+        if (name != null ? !name.equals(drug.name) : drug.name != null) return false;
+        if (!Arrays.equals(drugImage, drug.drugImage)) return false;
+        if (description != null ? !description.equals(drug.description) : drug.description != null) return false;
+        if (type != drug.type) return false;
+        if (activeSubstance != null ? !activeSubstance.equals(drug.activeSubstance) : drug.activeSubstance != null)
+            return false;
+        if (dosages != null ? !dosages.equals(drug.dosages) : drug.dosages != null) return false;
+        if (drugManufacturer != null ? !drugManufacturer.equals(drug.drugManufacturer) : drug.drugManufacturer != null)
+            return false;
+        return drugClass != null ? drugClass.equals(drug.drugClass) : drug.drugClass == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(drugImage);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (price != +0.0f ? Float.floatToIntBits(price) : 0);
+        result = 31 * result + (prescriptionEnable ? 1 : 0);
+        result = 31 * result + (inStock ? 1 : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (activeSubstance != null ? activeSubstance.hashCode() : 0);
+        result = 31 * result + (dosages != null ? dosages.hashCode() : 0);
+        result = 31 * result + (drugManufacturer != null ? drugManufacturer.hashCode() : 0);
+        result = 31 * result + (drugClass != null ? drugClass.hashCode() : 0);
+        return result;
+    }
+
+    public int getId() {
+
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -63,14 +113,6 @@ public class Drug {
         this.description = description;
     }
 
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
     public float getPrice() {
         return price;
     }
@@ -93,14 +135,6 @@ public class Drug {
 
     public void setInStock(boolean inStock) {
         this.inStock = inStock;
-    }
-
-    public String getDrugClass() {
-        return drugClass;
-    }
-
-    public void setDrugClass(String drugClass) {
-        this.drugClass = drugClass;
     }
 
     public DrugType getType() {
@@ -127,53 +161,19 @@ public class Drug {
         this.dosages = dosages;
     }
 
-    public int getId() {
-
-        return id;
+    public DrugManufacturer getDrugManufacturer() {
+        return drugManufacturer;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDrugManufacturer(DrugManufacturer drugManufacturer) {
+        this.drugManufacturer = drugManufacturer;
     }
 
-    @Override
-    public boolean equals(Object o) {
-
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Drug drug = (Drug) o;
-
-        if (id != drug.id) return false;
-        if (Float.compare(drug.price, price) != 0) return false;
-        if (prescriptionEnable != drug.prescriptionEnable) return false;
-        if (inStock != drug.inStock) return false;
-        if (name != null ? !name.equals(drug.name) : drug.name != null) return false;
-        if (!Arrays.equals(drugImage, drug.drugImage)) return false;
-        if (description != null ? !description.equals(drug.description) : drug.description != null) return false;
-        if (manufacturer != null ? !manufacturer.equals(drug.manufacturer) : drug.manufacturer != null) return false;
-        if (drugClass != null ? !drugClass.equals(drug.drugClass) : drug.drugClass != null) return false;
-        if (type != null ? !type.equals(drug.type) : drug.type != null) return false;
-        if (activeSubstance != null ? !activeSubstance.equals(drug.activeSubstance) : drug.activeSubstance != null)
-            return false;
-        return dosages != null ? dosages.equals(drug.dosages) : drug.dosages == null;
-
+    public DrugClass getDrugClass() {
+        return drugClass;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(drugImage);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (manufacturer != null ? manufacturer.hashCode() : 0);
-        result = 31 * result + (price != +0.0f ? Float.floatToIntBits(price) : 0);
-        result = 31 * result + (prescriptionEnable ? 1 : 0);
-        result = 31 * result + (inStock ? 1 : 0);
-        result = 31 * result + (drugClass != null ? drugClass.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (activeSubstance != null ? activeSubstance.hashCode() : 0);
-        result = 31 * result + (dosages != null ? dosages.hashCode() : 0);
-        return result;
+    public void setDrugClass(DrugClass drugClass) {
+        this.drugClass = drugClass;
     }
 }

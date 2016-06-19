@@ -8,9 +8,8 @@ import java.util.ResourceBundle;
 public class DBResourceManager {
     private static DBResourceManager instance = new DBResourceManager();
     private ResourceBundle resourceBundle;
-
     private DBResourceManager(){
-        resourceBundle = ResourceBundle.getBundle("by.training.pharmacy.dao.connection_pool.db");
+        resourceBundle = ResourceBundle.getBundle("resource.connection_pool.db");
     }
 
     public static DBResourceManager getInstance(){
