@@ -15,11 +15,11 @@ import java.util.List;
  * Created by vladislav on 19.06.16.
  */
 public class DatabaseDrugManufacturerDao extends DatabaseDAO<DrugManufacturer> implements DrugManufacturerDAO {
-    private static final String GET_MANUFACTURER_BY_COUNTRY_QUERY = "select dm_id, dm_name, dm_country, dm_description from drug_manufactures where dm_country=? LIMIT ?, ?";
-    private static final String GET_MANUFACTURER_BY_NAME_QUERY = "select dm_id, dm_name, dm_country, dm_description from drug_manufactures where dm_name LIKE ? LIMIT ?, ?";
-    private static final String GET_MANUFACTURER_BY_ID_QUERY = "select dm_id, dm_name, dm_country, dm_description from drug_manufactures where dm_id=? LIMIT 1;";
+    private static final String GET_MANUFACTURER_BY_COUNTRY_QUERY = "select dm_id, dm_name, dm_country, dm_description from drugs_manufactures where dm_country=? LIMIT ?, ?";
+    private static final String GET_MANUFACTURER_BY_NAME_QUERY = "select dm_id, dm_name, dm_country, dm_description from drugs_manufactures where dm_name LIKE ? LIMIT ?, ?";
+    private static final String GET_MANUFACTURER_BY_ID_QUERY = "select dm_id, dm_name, dm_country, dm_description from drugs_manufactures where dm_id=? LIMIT 1;";
     private static final String INSERT_MANUFACTURER_QUERY = "INSERT INTO drugs_manufactures (dm_name, dm_country, dm_description) VALUES (?, ?, ?);";
-    private static final String UPDATE_MANUFACTURE_QUERY = "UPDATE drugs_manufactures SET dm_name=?, dm_country=? dm_description=? where dm_id=?";
+    private static final String UPDATE_MANUFACTURE_QUERY = "UPDATE drugs_manufactures SET dm_name=?, dm_country=?, dm_description=? where dm_id=?";
     private static final String DELETE_MANUFACTURER_QUERY = "DELETE FROM drugs_manufactures where dm_id=?;";
     public DatabaseDrugManufacturerDao() throws DaoException {
         super();
@@ -84,7 +84,7 @@ public class DatabaseDrugManufacturerDao extends DatabaseDAO<DrugManufacturer> i
     @Override
     public void updateManufacturer(DrugManufacturer drugManufacturer) throws DaoException {
         try {
-            writeToDatabase(UPDATE_MANUFACTURE_QUERY, drugManufacturer.getName(), drugManufacturer.getCountry(), drugManufacturer.getDescription());
+            writeToDatabase(UPDATE_MANUFACTURE_QUERY, drugManufacturer.getName(), drugManufacturer.getCountry(), drugManufacturer.getDescription(), drugManufacturer.getId());
         } catch (ConnectionPoolException | SQLException e) {
             DaoException daoException = new DaoException("Can not update drugManufacturer "+drugManufacturer);
             Logger logger = LogManager.getLogger(this.getClass());
@@ -131,4 +131,6 @@ public class DatabaseDrugManufacturerDao extends DatabaseDAO<DrugManufacturer> i
         }
         return drugManufacturer;
     }
+
+
 }

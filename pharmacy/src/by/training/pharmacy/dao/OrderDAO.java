@@ -1,8 +1,8 @@
 package by.training.pharmacy.dao;
 
 import by.training.pharmacy.dao.exception.DaoException;
-import by.training.pharmacy.domain.Order;
-import by.training.pharmacy.domain.OrderStatus;
+import by.training.pharmacy.domain.order.Order;
+import by.training.pharmacy.domain.order.OrderStatus;
 import by.training.pharmacy.domain.Period;
 
 import java.util.Date;

@@ -35,7 +35,6 @@ abstract class DatabaseDAO <T> {
             connection = connectionPool.takeConnection();
             preparedStatement = initPreparedStatement(connection, query, params);
             resultSet = preparedStatement.executeQuery();
-            System.out.println(resultSet);
             while (resultSet.next()){
                 result.add(resultSetToDomain(resultSet));
 

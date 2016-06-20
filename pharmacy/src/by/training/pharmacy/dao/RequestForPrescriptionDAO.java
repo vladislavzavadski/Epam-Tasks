@@ -1,12 +1,10 @@
 package by.training.pharmacy.dao;
 
-import by.training.pharmacy.dao.connection_pool.exception.ConnectionPoolException;
 import by.training.pharmacy.dao.exception.DaoException;
 import by.training.pharmacy.domain.Period;
-import by.training.pharmacy.domain.RequestForPrescription;
-import by.training.pharmacy.domain.RequestStatus;
+import by.training.pharmacy.domain.prescription.RequestForPrescription;
+import by.training.pharmacy.domain.prescription.RequestStatus;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 

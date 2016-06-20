@@ -2,7 +2,7 @@ package by.training.pharmacy.dao;
 
 import by.training.pharmacy.dao.exception.DaoException;
 import by.training.pharmacy.domain.Period;
-import by.training.pharmacy.domain.Prescription;
+import by.training.pharmacy.domain.prescription.Prescription;
 
 import java.util.Date;
 import java.util.List;

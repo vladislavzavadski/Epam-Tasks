@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class DatabaseDrugClassDAO extends DatabaseDAO<DrugClass> implements DrugClassDAO {
     private static final String GET_CLASS_BY_NAME_QUERY = "select dr_class_name, dr_class_description from drug_classes where dr_class_name=? LIMIT 1;";
-    private static final String INSERT_DRUG_CLASS_QUERY = "inserts into drug_classes (dr_class_name, dr_class_description) VALUES(?,?);";
+    private static final String INSERT_DRUG_CLASS_QUERY = "insert into drug_classes (dr_class_name, dr_class_description) VALUES(?,?);";
     private static final String UPDATE_DRUG_CLASS_QUERY = "update drug_classes set dr_class_name=?, dr_class_description=? WHERE dr_class_name=?;";
     private static final String DELETE_DRUG_CLASS_QUERY = "delete from drug_classes where dr_class_name=?;";
     public DatabaseDrugClassDAO() throws DaoException {
@@ -52,9 +52,9 @@ public class DatabaseDrugClassDAO extends DatabaseDAO<DrugClass> implements Drug
     }
 
     @Override
-    public void updateDrugClass(DrugClass drugClass) throws DaoException {
+    public void updateDrugClass(DrugClass drugClass, String oldDrugName) throws DaoException {
         try {
-            writeToDatabase(UPDATE_DRUG_CLASS_QUERY, drugClass.getName(), drugClass.getDescription());
+            writeToDatabase(UPDATE_DRUG_CLASS_QUERY, drugClass.getName(), drugClass.getDescription(), oldDrugName);
         } catch (ConnectionPoolException | SQLException e) {
             DaoException daoException = new DaoException("Can not update drug class " +drugClass, e);
             Logger logger = LogManager.getLogger(this.getClass());

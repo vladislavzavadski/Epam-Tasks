@@ -20,10 +20,10 @@ import java.util.List;
  */
 public class DatabaseDrugDAO extends DatabaseDAO<Drug> implements DrugDAO {
 
-    private static final String GET_DRUGS_BY_ID_QUERY = "SELECT dr_class, dr_description, dr_image, dr_in_stock, dr_manufacturer, dr_name, dr_prescription_enable, dr_price, dr_type,  dr_dosage, dr_active_substance, dm_name, dm_country, dm_description, dr_class_name, dr_class_description FROM drugs inner join drugs_manufactures on dr_manufacturer = dm_id inner join drug_classes on dr_class = dr_class_name WHERE dr_id=?;";
-    private static final String GET_DRUGS_BY_NAME_QUERY = "SELECT dr_class, dr_description, dr_image, dr_in_stock, dr_manufacturer, dr_name, dr_prescription_enable, dr_price, dr_type,  dr_dosage, dr_active_substance, dm_name, dm_country, dm_description, dr_class_name, dr_class_description FROM drugs inner join drugs_manufactures on dr_manufacturer = dm_id inner join drug_classes on dr_class = dr_class_name WHERE dr_name LIKE ? LIMIT ?, ?;";
-    private static final String GET_DRUGS_BY_CLASS_QUERY = "SELECT dr_class, dr_description, dr_image, dr_in_stock, dr_manufacturer, dr_name, dr_prescription_enable, dr_price, dr_type,  dr_dosage, dr_active_substance, dm_name, dm_country, dm_description, dr_class_name, dr_class_description FROM drugs inner join drugs_manufactures on dr_manufacturer = dm_id inner join drug_classes on dr_class = dr_class_name WHERE dr_class=? LIMIT ?, ?;";
-    private static final String GET_DRUGS_BY_ACTIVE_SUBSTANCE_QUERY = "SELECT dr_class, dr_description, dr_image, dr_in_stock, dr_manufacturer, dr_name, dr_prescription_enable, dr_price, dr_type,  dr_dosage, dr_active_substance, dm_name, dm_country, dm_description, dr_class_name, dr_class_description FROM drugs inner join drugs_manufactures on dr_manufacturer = dm_id inner join drug_classes on dr_class = dr_class_name WHERE dr_active_substance=? LIMIT ?, ?;";
+    private static final String GET_DRUGS_BY_ID_QUERY = "SELECT dr_id, dr_class, dr_description, dr_image, dr_in_stock, dr_manufacturer, dr_name, dr_prescription_enable, dr_price, dr_type,  dr_dosage, dr_active_substance, dm_id,  dm_name, dm_country, dm_description, dr_class_name, dr_class_description FROM drugs inner join drugs_manufactures on dr_manufacturer = dm_id inner join drug_classes on dr_class = dr_class_name WHERE dr_id=?;";
+    private static final String GET_DRUGS_BY_NAME_QUERY = "SELECT dr_id, dr_class, dr_description, dr_image, dr_in_stock, dr_manufacturer, dr_name, dr_prescription_enable, dr_price, dr_type,  dr_dosage, dr_active_substance, dm_id,  dm_name, dm_country, dm_description, dr_class_name, dr_class_description FROM drugs inner join drugs_manufactures on dr_manufacturer = dm_id inner join drug_classes on dr_class = dr_class_name WHERE dr_name LIKE ? LIMIT ?, ?;";
+    private static final String GET_DRUGS_BY_CLASS_QUERY = "SELECT dr_id, dr_class, dr_description, dr_image, dr_in_stock, dr_manufacturer, dr_name, dr_prescription_enable, dr_price, dr_type,  dr_dosage, dr_active_substance, dm_id, dm_name, dm_country, dm_description, dr_class_name, dr_class_description FROM drugs inner join drugs_manufactures on dr_manufacturer = dm_id inner join drug_classes on dr_class = dr_class_name WHERE dr_class=? LIMIT ?, ?;";
+    private static final String GET_DRUGS_BY_ACTIVE_SUBSTANCE_QUERY = "SELECT dr_id, dr_class, dr_description, dr_image, dr_in_stock, dr_manufacturer, dr_name, dr_prescription_enable, dr_price, dr_type,  dr_dosage, dr_active_substance, dm_id, dm_name, dm_country, dm_description, dr_class_name, dr_class_description FROM drugs inner join drugs_manufactures on dr_manufacturer = dm_id inner join drug_classes on dr_class = dr_class_name WHERE dr_active_substance=? LIMIT ?, ?;";
     private static final String INSERT_DRUG_QUERY = "insert into drugs (dr_class, dr_description, dr_image, dr_in_stock, dr_manufacturer, dr_name, dr_prescription_enable, dr_price, dr_type,  dr_dosage, dr_active_substance) values (?,?,?,?,?,?,?,?,?,?,?);";
     private static final String UPDATE_DRUG_QUERY = "update drugs set dr_description = ?, dr_image = ?, dr_in_stock = ?, dr_prescription_enable = ?, dr_dosage = ? where dr_id=?;";
     private static final String DELETE_DRUG_QUERY = "delete from drugs where dr_id=?;";
@@ -97,7 +97,7 @@ public class DatabaseDrugDAO extends DatabaseDAO<Drug> implements DrugDAO {
         try {
             String dosages = "";
             for(int i:drug.getDosages()){
-                dosages+=','+i;
+                dosages+=","+i;
             }
             writeToDatabase(INSERT_DRUG_QUERY, drug.getDrugClass().getName(), drug.getDescription(), drug.getDrugImage(), drug.isInStock()
             ,drug.getDrugManufacturer().getId(), drug.getName(), drug.isPrescriptionEnable(), drug.getPrice(), drug.getType().toString().toLowerCase(), dosages.substring(1), drug.getActiveSubstance());
@@ -115,7 +115,7 @@ public class DatabaseDrugDAO extends DatabaseDAO<Drug> implements DrugDAO {
         try {
             String dosages = "";
             for (int i : drug.getDosages()) {
-                dosages += ',' + i;
+                dosages += "," + i;
             }
             writeToDatabase(UPDATE_DRUG_QUERY, drug.getDescription(), drug.getDrugImage(), drug.isInStock(), drug.isPrescriptionEnable(), dosages.substring(1), drug.getId());
         } catch (ConnectionPoolException|SQLException e) {
@@ -161,7 +161,7 @@ public class DatabaseDrugDAO extends DatabaseDAO<Drug> implements DrugDAO {
         }
 
         try {
-            drug.setDescription(resultSet.getString("dr_description0"));
+            drug.setDescription(resultSet.getString("dr_description"));
         } catch (SQLException e) {
             drug.setDescription(null);
         }

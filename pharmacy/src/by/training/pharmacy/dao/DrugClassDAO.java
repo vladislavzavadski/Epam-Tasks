@@ -9,6 +9,6 @@ import by.training.pharmacy.domain.drug.DrugClass;
 public interface DrugClassDAO {
     DrugClass getDrugClassByName(String name) throws DaoException;
     void insertDrugClass(DrugClass drugClass) throws DaoException;
-    void updateDrugClass(DrugClass drugClass) throws DaoException;
+    void updateDrugClass(DrugClass drugClass, String oldDrugClassName) throws DaoException;
     void deleteDrugClass(String name) throws DaoException;
 }

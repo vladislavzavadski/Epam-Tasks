@@ -1,7 +1,6 @@
 import by.training.pharmacy.dao.DaoFactory;
 import by.training.pharmacy.dao.exception.DaoException;
-import by.training.pharmacy.domain.Prescription;
-import by.training.pharmacy.domain.RequestForPrescription;
+import by.training.pharmacy.domain.prescription.RequestForPrescription;
 
 import java.util.List;
 

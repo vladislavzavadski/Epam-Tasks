@@ -18,12 +18,12 @@ import java.util.List;
  */
 public class DatabaseUserDAO extends DatabaseDAO<User> implements UserDAO {
 
-    private static final String GET_USER_QUERY = "select us_first_name, us_second_name, us_image, us_mail, us_phone, us_group from users WHERE  us_login=? and us_password=md5(?);";
-    private static  final String GET_USER_BY_LOGIN_QUERY = "SELECT us_first_name, us_second_name, us_group, us_mail, us_phone, us_image, sd_specialization, sd_description FROM users LEFT JOIN staff_descriptions ON users.us_login = staff_descriptions.sd_user_login WHERE us_login=?;";
-    private static final String SEARCH_USER_BY_ROLE_QUERY = "SELECT us_first_name, us_second_name, us_mail, us_phone, us_image, sd_specialization, sd_description FROM users LEFT JOIN staff_descriptions ON us_login=sd_user_login WHERE us_group=? LIMIT ?, ?;";
-    private static final String SEARCH_USERS_QUERY = "select us_first_name, us_second_name, us_image, us_mail, us_phone, us_group, sd_specialization, sd_description from users LEFT JOIN staff_descriptions on sd_user_login=us_login where us_first_name LIKE ? and us_second_name LIKE ? LIMIT ?, ?;";
+    private static final String GET_USER_QUERY = "select us_login, us_first_name, us_second_name, us_image, us_mail, us_phone, us_group from users WHERE  us_login=? and us_password=md5(?);";
+    private static  final String GET_USER_BY_LOGIN_QUERY = "SELECT us_login, us_first_name, us_second_name, us_group, us_mail, us_phone, us_image, sd_specialization, sd_description FROM users LEFT JOIN staff_descriptions ON users.us_login = staff_descriptions.sd_user_login WHERE us_login=?;";
+    private static final String SEARCH_USER_BY_ROLE_QUERY = "SELECT us_login, us_first_name, us_second_name, us_mail, us_phone, us_image, sd_specialization, sd_description FROM users LEFT JOIN staff_descriptions ON us_login=sd_user_login WHERE us_group=? LIMIT ?, ?;";
+    private static final String SEARCH_USERS_QUERY = "select us_login, us_first_name, us_second_name, us_image, us_mail, us_phone, us_group, sd_specialization, sd_description from users LEFT JOIN staff_descriptions on sd_user_login=us_login where us_first_name LIKE ? and us_second_name LIKE ? LIMIT ?, ?;";
     private static final String INSERT_USER_QUERY = "INSERT INTO users (us_login, us_password, us_first_name, us_second_name, us_group, us_image, us_mail, us_phone) VALUES (?,md5(?),?,?,?,?,?,?)";
-    private static final String UPDATE_USER_QUERY = "UPDATE users SET us_password=md5(?), us_first_name=?, us_second_name=?, us_image=?, us_mail=?, us_phone=? WHERE us_login=?";
+    private static final String UPDATE_USER_QUERY = "UPDATE users SET us_password=md5(?), us_first_name=?, us_second_name=?, us_image=?, us_mail=?, us_phone=? WHERE us_login=?;";
     private static final String DELETE_USER_QUERY = "DELETE FROM users WHERE us_login=?";
     private static final String SEARCH_USER_BY_SPECIALIZATION_QUERY = "SELECT us_first_name, us_second_name, us_image, us_group, us_mail, us_phone sd_specialization, sd_description FROM users INNER JOIN staff_descriptions ON users.us_login = staff_descriptions.sd_user_login WHERE sd_specialization=? LIMIT ?, ?;";
 
@@ -55,7 +55,7 @@ public class DatabaseUserDAO extends DatabaseDAO<User> implements UserDAO {
 
         User user = null;
         try {
-            List<User> result = readFromDatabase(GET_USER_BY_LOGIN_QUERY);
+            List<User> result = readFromDatabase(GET_USER_BY_LOGIN_QUERY, login);
             if(!result.isEmpty()){
                 user = result.get(0);
             }
@@ -120,9 +120,9 @@ public class DatabaseUserDAO extends DatabaseDAO<User> implements UserDAO {
 
 
         try {
-            writeToDatabase(UPDATE_USER_QUERY, user.getLogin(), user.getPassword(),
-                    user.getFirstName(), user.getSecondName(), user.getUserRole().toString().toLowerCase(),
-                    user.getUserImage(), user.getMail(), user.getPhone());
+            writeToDatabase(UPDATE_USER_QUERY, user.getPassword(),
+                    user.getFirstName(), user.getSecondName(),
+                    user.getUserImage(), user.getMail(), user.getPhone(), user.getLogin());
         } catch (ConnectionPoolException|SQLException e) {
             DaoException daoException = new DaoException("Cannot update user", e);
             Logger logger = LogManager.getLogger(this.getClass());

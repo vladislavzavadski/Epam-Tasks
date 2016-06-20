@@ -3,8 +3,8 @@ package by.training.pharmacy.dao.impl.database;
 import by.training.pharmacy.dao.OrderDAO;
 import by.training.pharmacy.dao.connection_pool.exception.ConnectionPoolException;
 import by.training.pharmacy.dao.exception.DaoException;
-import by.training.pharmacy.domain.Order;
-import by.training.pharmacy.domain.OrderStatus;
+import by.training.pharmacy.domain.order.Order;
+import by.training.pharmacy.domain.order.OrderStatus;
 import by.training.pharmacy.domain.Period;
 import by.training.pharmacy.domain.drug.Drug;
 import by.training.pharmacy.domain.user.User;
@@ -27,7 +27,7 @@ public class DatabaseOrderDAO extends DatabaseDAO<Order> implements OrderDAO {
     private static final String GET_ORDERS_BY_DATE_BEFORE_QUERY = "SELECT us_login, us_first_name, us_second_name, dr_id, dr_name, or_id, or_drug_count, or_drug_dosage, or_status, or_date from orders inner join users on us_login = or_client_login inner join drugs on dr_id = or_drug_id where or_date<? LIMIT ?, ?;";
     private static final String GET_ORDERS_BY_DATE_AFTER_QUERY = "SELECT us_login, us_first_name, us_second_name, dr_id, dr_name, or_id, or_drug_count, or_drug_dosage, or_status, or_date from orders inner join users on us_login = or_client_login inner join drugs on dr_id = or_drug_id where or_date>? LIMIT ?, ?;";
     private static final String GET_ORDERS_BY_DATE_CURRENT_QUERY = "SELECT us_login, us_first_name, us_second_name, dr_id, dr_name, or_id, or_drug_count, or_drug_dosage, or_status, or_date from orders inner join users on us_login = or_client_login inner join drugs on dr_id = or_drug_id where or_date=? LIMIT ?, ?;";
-    private static final String INSERT_ORDER_QUERY = "INSERT INTO orders (or_client_login, or_drug_id, or_drug_count, or_drug_dosage, or_status, or_date) VALUES(?, ?, ?, ?, ?, ?);";
+    private static final String INSERT_ORDER_QUERY = "INSERT INTO orders (or_id, or_client_login, or_drug_id, or_drug_count, or_drug_dosage, or_status, or_date) VALUES(?, ?, ?, ?, ?, ?, ?);";
     private static final String DELETE_ORDER_QUERY = "delete from orders where or_id=?;";
     private static final String UPDATE_ORDER_QUERY = "UPDATE orders SET or_drug_id=?, or_drug_count=?, or_drug_dosage=?, or_status=? WHERE or_id=?";
 
@@ -138,10 +138,12 @@ public class DatabaseOrderDAO extends DatabaseDAO<Order> implements OrderDAO {
         }
     }
 
+
+
     @Override
     public void insertOrder(Order order) throws DaoException {
         try {
-            writeToDatabase(INSERT_ORDER_QUERY, order.getClient().getLogin(), order.getDrug().getId(), order.getDrugCount(), order.getDrugDosage(), order.getOrderStatus().toString().toLowerCase(), order.getOrderDate());
+            writeToDatabase(INSERT_ORDER_QUERY, order.getId(), order.getClient().getLogin(), order.getDrug().getId(), order.getDrugCount(), order.getDrugDosage(), order.getOrderStatus().toString().toLowerCase(), order.getOrderDate());
         } catch (ConnectionPoolException | SQLException e) {
 
             DaoException daoException = new DaoException("Can not insert new order "+ order +" to database", e);

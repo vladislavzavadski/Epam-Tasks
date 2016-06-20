@@ -4,7 +4,7 @@ import by.training.pharmacy.dao.PrescriptionDAO;
 import by.training.pharmacy.dao.connection_pool.exception.ConnectionPoolException;
 import by.training.pharmacy.dao.exception.DaoException;
 import by.training.pharmacy.domain.Period;
-import by.training.pharmacy.domain.Prescription;
+import by.training.pharmacy.domain.prescription.Prescription;
 import by.training.pharmacy.domain.drug.Drug;
 import by.training.pharmacy.domain.user.User;
 import org.apache.logging.log4j.LogManager;

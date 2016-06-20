@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class DatabaseUserDescriptionDAO extends DatabaseDAO<UserDescription> implements UserDescriptionDAO {
     private static final String INSERT_DESCRIPTION_QUERY = "INSERT INTO staff_descriptions (sd_user_login, sd_specialization, sd_description) VALUES (?, ?, ?);";
-    private static final String GET_DESCRIPTION_QUERY = "SELECT sd_user_login, sd_specialization, sd_description FROM staff_descriptions WHERE sd_user_login=?; limit 1";
+    private static final String GET_DESCRIPTION_QUERY = "SELECT sd_user_login, sd_specialization, sd_description FROM staff_descriptions WHERE sd_user_login=? limit 1;";
     private static final String UPDATE_DESCRIPTION_QUERY = "UPDATE staff_descriptions SET sd_specialization=?, sd_description=? WHERE sd_user_login=?;";
-    private static final String DELETE_DESCRIPTION_QWERY = "DELETE FROM staff_descriptions WHERE sd_user_login=?;";
+    private static final String DELETE_DESCRIPTION_QUERY = "DELETE FROM staff_descriptions WHERE sd_user_login=?;";
 
     public DatabaseUserDescriptionDAO() throws DaoException {
         super();
@@ -67,7 +67,7 @@ public class DatabaseUserDescriptionDAO extends DatabaseDAO<UserDescription> imp
     @Override
     public void deleteUserDescription(String userLogin) throws DaoException {
         try {
-            writeToDatabase(DELETE_DESCRIPTION_QWERY, userLogin);
+            writeToDatabase(DELETE_DESCRIPTION_QUERY, userLogin);
         } catch (ConnectionPoolException | SQLException e) {
             DaoException daoException = new DaoException("Can not delete user description with login = \'"+userLogin+"\'", e);
             Logger logger = LogManager.getLogger(this.getClass());
